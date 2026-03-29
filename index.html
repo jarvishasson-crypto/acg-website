@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Construction Group Inc. — Luxury Residential Construction · Beverly Hills</title>
+  <meta name="description" content="A Construction Group Inc. (Lic. #811094) builds extraordinary luxury residences in Beverly Hills, Bel Air, and greater Los Angeles. Family-owned since 2002." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    img { display: block; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
+
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --bg:       #FFFFFF;
+      --bg-warm:  #FAF8F5;
+      --bg-cream: #F2EDE5;
+      --text:     #1C1917;
+      --text-2:   #6B6358;
+      --text-3:   #A8A09A;
+      --accent:   #9B7B52;
+      --accent-lt:#B8956B;
+      --border:   rgba(28,25,23,0.09);
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 56px; }
+
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    /* ── SCROLL REVEAL ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+
+    /* ────────────────────────────────────────────────────
+       NAV
+    ──────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 24px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding 0.4s var(--ease), background 0.4s, box-shadow 0.4s;
+    }
+    .nav.scrolled {
+      padding: 16px 56px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    /* Logo SVG */
+    .nav-logo { display: flex; align-items: center; height: 42px; flex-shrink: 0; }
+    .nav-logo svg { height: 42px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-2);
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--bg) !important;
+      background: var(--text);
+      padding: 10px 26px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* Mobile hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      cursor: pointer;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 1px;
+      background: var(--text);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 0; z-index: 190;
+      background: var(--bg);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--text);
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ────────────────────────────────────────────────────
+       HERO
+    ──────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=2400&q=85');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.05);
+      transition: transform 8s var(--ease);
+    }
+    .hero-img.loaded { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(255,255,255,0) 30%,
+        rgba(255,255,255,0.12) 60%,
+        rgba(255,255,255,0.65) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 56px 88px;
+      max-width: 760px;
+    }
+
+    .hero-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 1s 0.4s, transform 1s 0.4s var(--ease-out);
+    }
+    .hero-label.in { opacity: 1; transform: none; }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(52px, 6.5vw, 96px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1.1s 0.55s, transform 1.1s 0.55s var(--ease-out);
+    }
+    .hero h1.in { opacity: 1; transform: none; }
+    .hero h1 em { font-style: italic; color: var(--text-2); }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-2);
+      max-width: 440px;
+      line-height: 1.8;
+      margin-bottom: 44px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 1s 0.7s, transform 1s 0.7s var(--ease-out);
+    }
+    .hero-sub.in { opacity: 1; transform: none; }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 1s 0.85s, transform 1s 0.85s var(--ease-out);
+    }
+    .hero-actions.in { opacity: 1; transform: none; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--text);
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent); }
+
+    .btn-ghost {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 88px; right: 56px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 1s 1.1s;
+    }
+    .hero-badge.in { opacity: 1; }
+    .hero-badge-line { width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--accent)); align-self: center; }
+    .hero-badge span { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); writing-mode: vertical-lr; }
+
+    /* ────────────────────────────────────────────────────
+       MARQUEE
+    ──────────────────────────────────────────────────── */
+    .marquee {
+      padding: 18px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-warm);
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 36s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding-right: 40px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+    .marquee-dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ────────────────────────────────────────────────────
+       STATEMENT
+    ──────────────────────────────────────────────────── */
+    .statement {
+      padding: 128px 0;
+      background: var(--bg);
+      text-align: center;
+    }
+    .statement-quote {
+      font-family: var(--serif);
+      font-size: clamp(34px, 4vw, 62px);
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      max-width: 820px;
+      margin: 0 auto 24px;
+      color: var(--text);
+    }
+    .statement-quote em { font-style: italic; color: var(--text-2); }
+    .statement-body {
+      font-size: 15px;
+      color: var(--text-2);
+      max-width: 520px;
+      margin: 0 auto 72px;
+      line-height: 1.8;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .stat {
+      padding: 44px 32px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .stat:last-child { border-right: none; }
+    .stat:hover { background: var(--bg-warm); }
+    .stat-number {
+      display: block;
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ────────────────────────────────────────────────────
+       PORTFOLIO
+    ──────────────────────────────────────────────────── */
+    .portfolio {
+      padding: 0 0 128px;
+      background: var(--bg);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding-top: 0;
+    }
+    .section-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .section-link {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-2);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      margin-left: 24px;
+    }
+    .section-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* Portfolio divider */
+    .portfolio-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 56px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+    .p-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg-cream);
+    }
+    .p1 { grid-column: 1 / 8; }
+    .p2 { grid-column: 8 / 13; }
+    .p3 { grid-column: 1 / 5; }
+    .p4 { grid-column: 5 / 9; }
+    .p5 { grid-column: 9 / 13; }
+
+    .p-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: unset;
+      transition: transform 0.8s var(--ease), filter 0.4s;
+      filter: brightness(0.96);
+    }
+    .p1 img { min-height: 520px; }
+    .p2 img { min-height: 520px; }
+    .p3 img, .p4 img, .p5 img { min-height: 320px; }
+    .p-item:hover img { transform: scale(1.04); filter: brightness(0.88); }
+
+    .p-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 24px 24px 20px;
+      background: linear-gradient(to top, rgba(28,25,23,0.72) 0%, transparent 100%);
+      transform: translateY(6px);
+      opacity: 0;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .p-item:hover .p-caption { opacity: 1; transform: none; }
+    .p-caption h3 {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 300;
+      color: #FFF;
+      margin-bottom: 4px;
+    }
+    .p-caption span {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ────────────────────────────────────────────────────
+       STORY
+    ──────────────────────────────────────────────────── */
+    .story {
+      padding: 128px 0;
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .story-inner {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 96px;
+      align-items: center;
+    }
+    .story-img-wrap { position: relative; }
+    .story-img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: top;
+    }
+    .story-badge {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 100px; height: 100px;
+      background: var(--accent);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+    .story-badge b {
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 300;
+      color: #FFF;
+      line-height: 1;
+    }
+    .story-badge small {
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .story-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      line-height: 1.18;
+      margin-bottom: 28px;
+      margin-top: 12px;
+    }
+    .story-text h2 em { font-style: italic; color: var(--text-2); }
+    .story-text p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.85;
+      margin-bottom: 20px;
+      max-width: 520px;
+    }
+    .story-detail {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+    }
+    .story-detail-line {
+      width: 32px; height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .story-detail-text {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .story-sig {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-style: italic;
+      color: var(--accent);
+      margin-top: 36px;
+    }
+
+    /* ────────────────────────────────────────────────────
+       SERVICES
+    ──────────────────────────────────────────────────── */
+    .services {
+      padding: 128px 0;
+      background: var(--bg);
+    }
+    .services-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .services-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      padding: 52px 44px 48px;
+      border-right: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .service-card:last-child { border-right: none; }
+    .service-card:hover { background: var(--bg-warm); }
+
+    .service-num {
+      display: block;
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 28px;
+      letter-spacing: -2px;
+    }
+    .service-card h3 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.8;
+    }
+    .service-bar {
+      width: 28px; height: 1px;
+      background: var(--accent);
+      margin-top: 32px;
+    }
+
+    /* ────────────────────────────────────────────────────
+       PARTNERS
+    ──────────────────────────────────────────────────── */
+    .partners {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+      background: var(--bg-warm);
+    }
+    .partners-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .partners-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .partners-logos {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+    }
+    .partner-name {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
+    .partner-name:hover { color: var(--text-2); }
+    .partner-sep {
+      font-size: 12px;
+      color: var(--border);
+    }
+
+    /* ────────────────────────────────────────────────────
+       CONTACT
+    ──────────────────────────────────────────────────── */
+    .contact {
+      padding: 128px 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 96px;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      line-height: 1.18;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+    .contact-left h2 em { font-style: italic; color: var(--text-2); }
+    .contact-sub {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.8;
+      max-width: 380px;
+      margin-bottom: 44px;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 0; }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-2);
+      transition: color 0.2s;
+    }
+    .contact-info-item:first-child { border-top: 1px solid var(--border); }
+    .contact-info-item:hover { color: var(--text); }
+    .contact-info-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      white-space: nowrap;
+      padding-top: 2px;
+      min-width: 64px;
+    }
+    .contact-license {
+      margin-top: 28px;
+      font-size: 11px;
+      color: var(--text-3);
+      letter-spacing: 1px;
+    }
+
+    /* Contact form */
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-field.full { grid-column: span 2; }
+    .form-field label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+    .form-field select { cursor: pointer; }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-bottom-color: var(--accent);
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: var(--text-3); }
+
+    .form-submit-wrap {
+      grid-column: span 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .form-note {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--text);
+      color: #FFF;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--accent); }
+
+    /* ────────────────────────────────────────────────────
+       FOOTER
+    ──────────────────────────────────────────────────── */
+    footer {
+      padding: 40px 56px;
+      background: var(--text);
+      color: rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo svg path, .footer-logo svg text, .footer-logo svg line,
+    .footer-logo svg polygon { /* handled in SVG fill */ }
+    .footer-copy { font-size: 11px; }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.75); }
+    .footer-lic {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ────────────────────────────────────────────────────
+       RESPONSIVE
+    ──────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .container { padding: 0 32px; }
+      .nav { padding: 20px 32px; }
+      .nav.scrolled { padding: 14px 32px; }
+      .story-inner, .contact-inner { gap: 56px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .service-card:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+
+      .hero-content { padding: 0 24px 72px; }
+      .hero-badge { display: none; }
+      .container { padding: 0 24px; }
+      .nav { padding: 18px 24px; }
+      .nav.scrolled { padding: 14px 24px; }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .p1, .p2, .p3, .p4, .p5 {
+        grid-column: 1 / -1;
+      }
+      .p1 img, .p2 img { min-height: 300px; }
+      .p3 img, .p4 img, .p5 img { min-height: 240px; }
+
+      .story-inner { grid-template-columns: 1fr; gap: 48px; }
+      .story-badge { right: 0; }
+      .contact-inner { grid-template-columns: 1fr; gap: 56px; }
+      .contact-form { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: 1; }
+      .form-submit-wrap { grid-column: 1; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      footer { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── MOBILE MENU ──────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#work" onclick="closeMenu()">Work</a>
+    <a href="#story" onclick="closeMenu()">Story</a>
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+
+  <!-- ── NAV ──────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo" aria-label="A Construction Group Inc.">
+      <svg viewBox="0 0 248 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Monogram: italic A -->
+        <text x="0" y="44" font-family="Cormorant Garamond, Georgia, serif" font-size="50" font-style="italic" font-weight="300" fill="#1C1917">A</text>
+        <!-- Vertical divider -->
+        <line x1="48" y1="8" x2="48" y2="44" stroke="#9B7B52" stroke-width="1"/>
+        <!-- Wordmark -->
+        <text x="58" y="26" font-family="DM Sans, sans-serif" font-size="9.5" font-weight="400" letter-spacing="3.5" fill="#1C1917">CONSTRUCTION</text>
+        <text x="58" y="42" font-family="DM Sans, sans-serif" font-size="9.5" font-weight="400" letter-spacing="3.5" fill="#6B6358">GROUP INC.</text>
+      </svg>
+    </a>
+
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#story">Story</a>
+      <a href="#services">Services</a>
+      <a href="#contact" class="nav-cta">Inquire</a>
+    </div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-img" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-label" id="heroLabel">Beverly Hills · Est. 2002</span>
+      <h1 id="heroH1">Homes of<br><em>Enduring Beauty</em></h1>
+      <p class="hero-sub" id="heroSub">Luxury residential construction for those who refuse to compromise. Family-owned, precision-driven, referral only.</p>
+      <div class="hero-actions" id="heroActions">
+        <a class="btn-primary" href="#work">View Our Work</a>
+        <a class="btn-ghost" href="#story">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-badge" id="heroBadge">
+      <div class="hero-badge-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ── MARQUEE ───────────────────────────────── -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-item">Beverly Hills<span class="marquee-dot"></span>Bel Air<span class="marquee-dot"></span>Holmby Hills<span class="marquee-dot"></span>Brentwood<span class="marquee-dot"></span>Pacific Palisades<span class="marquee-dot"></span>New Construction<span class="marquee-dot"></span>Full Renovation<span class="marquee-dot"></span>Design-Build<span class="marquee-dot"></span>B General Building<span class="marquee-dot"></span>Lic. #811094<span class="marquee-dot"></span></div>
+      <div class="marquee-item">Beverly Hills<span class="marquee-dot"></span>Bel Air<span class="marquee-dot"></span>Holmby Hills<span class="marquee-dot"></span>Brentwood<span class="marquee-dot"></span>Pacific Palisades<span class="marquee-dot"></span>New Construction<span class="marquee-dot"></span>Full Renovation<span class="marquee-dot"></span>Design-Build<span class="marquee-dot"></span>B General Building<span class="marquee-dot"></span>Lic. #811094<span class="marquee-dot"></span></div>
+    </div>
+  </div>
+
+  <!-- ── STATEMENT ─────────────────────────────── -->
+  <section class="statement">
+    <div class="container">
+      <p class="eyebrow reveal">Our Standard</p>
+      <h2 class="statement-quote reveal reveal-d1">
+        We don't build houses.<br>We build <em>legacies</em>.
+      </h2>
+      <p class="statement-body reveal reveal-d2">
+        For over two decades, A Construction Group Inc. has crafted extraordinary luxury residences across the most prestigious neighborhoods in Los Angeles — with every project built on trust, transparency, and uncompromising craft.
+      </p>
+      <div class="stats">
+        <div class="stat reveal reveal-d2">
+          <span class="stat-number">23+</span>
+          <span class="stat-label">Years of Excellence</span>
+        </div>
+        <div class="stat reveal reveal-d3">
+          <span class="stat-number">$20M+</span>
+          <span class="stat-label">Average Project Value</span>
+        </div>
+        <div class="stat reveal reveal-d4">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Referral Based</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PORTFOLIO ─────────────────────────────── -->
+  <section class="portfolio" id="work">
+    <div class="container">
+      <div class="section-header reveal">
+        <div>
+          <p class="eyebrow" style="margin-bottom:12px">Selected Work</p>
+          <h2>Recent Projects</h2>
+        </div>
+        <a class="section-link" href="#contact">Inquire About Your Project →</a>
+      </div>
+      <div class="portfolio-divider"></div>
+      <div class="portfolio-grid">
+        <div class="p-item p1 reveal">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85" alt="The Opus Estate — Bel Air" loading="lazy" />
+          <div class="p-caption">
+            <h3>The Opus Estate</h3>
+            <span>Bel Air · 14,200 SF · New Construction</span>
+          </div>
+        </div>
+        <div class="p-item p2 reveal reveal-d1">
+          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85" alt="Holmby Residence" loading="lazy" />
+          <div class="p-caption">
+            <h3>Holmby Residence</h3>
+            <span>Holmby Hills · 9,800 SF · Renovation</span>
+          </div>
+        </div>
+        <div class="p-item p3 reveal reveal-d1">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=85" alt="Crest Villa" loading="lazy" />
+          <div class="p-caption">
+            <h3>Crest Villa</h3>
+            <span>Beverly Hills · 11,200 SF</span>
+          </div>
+        </div>
+        <div class="p-item p4 reveal reveal-d2">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" alt="The Summit House" loading="lazy" />
+          <div class="p-caption">
+            <h3>The Summit House</h3>
+            <span>Brentwood · 8,400 SF</span>
+          </div>
+        </div>
+        <div class="p-item p5 reveal reveal-d3">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85" alt="Pacific Perch" loading="lazy" />
+          <div class="p-caption">
+            <h3>Pacific Perch</h3>
+            <span>Pacific Palisades · 7,600 SF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STORY ─────────────────────────────────── -->
+  <section class="story" id="story">
+    <div class="container">
+      <div class="story-inner">
+        <div class="story-img-wrap reveal">
+          <img class="story-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85" alt="Amir Hasson — A Construction Group Inc." />
+          <div class="story-badge">
+            <b>23</b>
+            <small>Years</small>
+          </div>
+        </div>
+        <div class="story-text reveal reveal-d2">
+          <p class="eyebrow">Our Story</p>
+          <h2>A father.<br>A son.<br><em>A legacy built.</em></h2>
+          <p>Founded by Amir Hasson in 2002, A Construction Group Inc. was built on a simple conviction: that every home deserves to be a masterpiece. What began as a solo operation has grown into one of the most respected luxury construction firms in Los Angeles.</p>
+          <p>Today, Amir works side by side with his son — combining over two decades of master craftsmanship with a new generation's vision for what luxury living can be. Every project we take on is personal. Every detail is intentional. Every home is built to last.</p>
+          <div class="story-detail">
+            <div class="story-detail-line"></div>
+            <span class="story-detail-text">B General Building · Lic. #811094</span>
+          </div>
+          <div class="story-sig">Amir Hasson</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ───────────────────────────────── -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header reveal">
+        <p class="eyebrow">What We Do</p>
+        <h2>Our Services</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <span class="service-num">01</span>
+          <h3>Ground-Up Construction</h3>
+          <p>From vacant lot to fully realized estate. We manage every phase of new home construction — architecture coordination, permitting, all trades — with the same hands-on care for each detail from foundation to finish.</p>
+          <div class="service-bar"></div>
+        </div>
+        <div class="service-card reveal reveal-d1">
+          <span class="service-num">02</span>
+          <h3>Complete Renovation</h3>
+          <p>Transforming existing structures into modern luxury residences. Whether full gut-remodels or high-end upgrades, we restore and reinvent with the same standards we bring to new construction.</p>
+          <div class="service-bar"></div>
+        </div>
+        <div class="service-card reveal reveal-d2">
+          <span class="service-num">03</span>
+          <h3>Design-Build Partnerships</h3>
+          <p>Collaborating with the finest interior designers and architects in Los Angeles — including Clements Design and Clint Nicholas — to bring visionary projects to life with complete precision.</p>
+          <div class="service-bar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PARTNERS ───────────────────────────────── -->
+  <div class="partners">
+    <div class="container">
+      <div class="partners-inner reveal">
+        <span class="partners-label">Trusted Design Partners</span>
+        <div class="partners-logos">
+          <span class="partner-name">Clements Design</span>
+          <span class="partner-sep">—</span>
+          <span class="partner-name">Clint Nicholas Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT ────────────────────────────────── -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-left reveal">
+          <p class="eyebrow">Get in Touch</p>
+          <h2>Begin your <em>project</em></h2>
+          <p class="contact-sub">We work by referral and select inquiry. If you're planning a luxury build or renovation in the Los Angeles area, we'd love to hear about your vision.</p>
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <span class="contact-info-label">Phone</span>
+              <a href="tel:+18188885667">(818) 888-5667</a>
+            </div>
+            <div class="contact-info-item">
+              <span class="contact-info-label">Email</span>
+              <a href="mailto:info@aconstructiongroup.com">info@aconstructiongroup.com</a>
+            </div>
+            <div class="contact-info-item">
+              <span class="contact-info-label">Office</span>
+              <span>6442 Platt Ave #655<br>West Hills, CA 91307</span>
+            </div>
+            <div class="contact-info-item">
+              <span class="contact-info-label">Service Area</span>
+              <span>Beverly Hills · Bel Air · Holmby Hills<br>Brentwood · Pacific Palisades</span>
+            </div>
+          </div>
+          <p class="contact-license">CA Contractor Lic. #811094 — B General Building</p>
+        </div>
+        <div class="reveal reveal-d2">
+          <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-field">
+              <label>First Name</label>
+              <input type="text" name="fname" placeholder="Jane" required />
+            </div>
+            <div class="form-field">
+              <label>Last Name</label>
+              <input type="text" name="lname" placeholder="Smith" required />
+            </div>
+            <div class="form-field">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="jane@example.com" required />
+            </div>
+            <div class="form-field">
+              <label>Phone</label>
+              <input type="tel" name="phone" placeholder="(310) 000-0000" />
+            </div>
+            <div class="form-field full">
+              <label>Project Type</label>
+              <select name="type" required>
+                <option value="" disabled selected>Select project type</option>
+                <option>New Construction</option>
+                <option>Complete Renovation</option>
+                <option>Partial Renovation</option>
+                <option>Design-Build Partnership</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label>Tell Us About Your Project</label>
+              <textarea name="message" rows="5" placeholder="Location, scope, timeline, budget range…"></textarea>
+            </div>
+            <div class="form-submit-wrap">
+              <span class="form-note">We typically respond within 24 hours.</span>
+              <button type="submit" class="btn-submit">Send Inquiry →</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────── -->
+  <footer>
+    <svg viewBox="0 0 200 42" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="36" font-family="Cormorant Garamond, serif" font-size="40" font-style="italic" font-weight="300" fill="rgba(255,255,255,0.35)">A</text>
+      <line x1="38" y1="6" x2="38" y2="36" stroke="rgba(155,123,82,0.6)" stroke-width="1"/>
+      <text x="46" y="20" font-family="DM Sans, sans-serif" font-size="8" font-weight="400" letter-spacing="3" fill="rgba(255,255,255,0.3)">CONSTRUCTION</text>
+      <text x="46" y="34" font-family="DM Sans, sans-serif" font-size="8" font-weight="400" letter-spacing="3" fill="rgba(255,255,255,0.2)">GROUP INC.</text>
+    </svg>
+    <span class="footer-copy">© 2025 A Construction Group Inc. All rights reserved.</span>
+    <div class="footer-right">
+      <span class="footer-lic">Lic. #811094</span>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Houzz</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── NAV SCROLL ───────────────────────────── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── HERO ANIMATIONS ─────────────────────── */
+    window.addEventListener('load', () => {
+      document.getElementById('heroBg').classList.add('loaded');
+      setTimeout(() => document.getElementById('heroLabel').classList.add('in'), 100);
+      setTimeout(() => document.getElementById('heroH1').classList.add('in'), 200);
+      setTimeout(() => document.getElementById('heroSub').classList.add('in'), 350);
+      setTimeout(() => document.getElementById('heroActions').classList.add('in'), 500);
+      setTimeout(() => document.getElementById('heroBadge').classList.add('in'), 700);
+    });
+
+    /* ── SCROLL REVEAL ───────────────────────── */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    /* ── MOBILE MENU ─────────────────────────── */
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('hamburger');
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* ── FORM SUBMIT ─────────────────────────── */
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      btn.textContent = 'Sent ✓';
+      btn.style.background = '#4A7C59';
+      btn.disabled = true;
+    }
+
+    /* ── SMOOTH SCROLL (nav links) ───────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
